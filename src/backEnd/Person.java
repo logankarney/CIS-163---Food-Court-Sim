@@ -7,6 +7,12 @@ package backEnd;
  * @author   Roger Ferguson
  */
 public class Person {
+	
+	private enum TypeOfPerson {
+		LIMITED_TIME, SPECIAL_NEEDS, REGULAR
+	}
+	
+	private TypeOfPerson type;
 	private int tickTime;
 	private Eatery Destination;
 	
