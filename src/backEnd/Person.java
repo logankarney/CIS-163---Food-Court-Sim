@@ -19,6 +19,15 @@ public class Person {
 	// max time person stays in line
 	protected double boothTime;
 	
+	public Person(){
+	}
+	
+	public Person(Person p){
+		this.tickTime = p.tickTime;
+		this.Destination = p.Destination;
+		this.boothTime = p.boothTime;
+	}
+	
 	public double getBoothTime() {
 		return boothTime;
 	}
