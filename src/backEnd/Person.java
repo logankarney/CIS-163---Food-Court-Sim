@@ -43,7 +43,7 @@ public class Person {
 		this.tickTime = tickTime;
 	}
 		
-	public int getEateryTime(){
+	public double getEateryTime(){
 		return this.boothTime;
 	}
 
