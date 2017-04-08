@@ -35,6 +35,7 @@ public class PersonProducer implements ClockListener {
 			int rNumber = (int) (Math.random() * 100);
 
 			person.setEateryTime(averageEateryTime * 0.5 * r.nextGaussian() + averageEateryTime + .5);
+			person.setCashierTime(18);
 			person.setTickTime(tick);
 
 			// Determines what type of Person the customer will be
