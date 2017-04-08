@@ -1,6 +1,6 @@
 package frontEnd;
 
-import java.awt.BorderLayout;
+import java.awt.BorderLayout; 
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -13,187 +13,201 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import backEnd.Clock;
-import backEnd.Eatery;
-import backEnd.PersonProducer;
+import BackEnd.Clock;
+import BackEnd.Eatery;
+import BackEnd.PersonProducer;
 
 public class DataGUI extends JFrame implements ActionListener {
-
-	JPanel stats;
-	JPanel buttons;
-	JPanel labels;
-
-	JButton start;
-	JButton stop;
-
-	private JTextField secondsToNextPerson;
-	private JTextField averageSecondsCashier;
-	private JTextField totalTime;
-	private JTextField averageSecondsEatery;
-	private JTextField secondsBeforePersonLeaves;
-	private JTextField numberOfEateries;
 	
-	
-	Eatery booth;
+	private String a;
+	private String b;
+	private String c;
+	private String d;
+	private String e;
+	private String f;
 
-	public DataGUI() {
-		setLayout(new BorderLayout());
+	//input JPanel information
+	private JPanel input;
+	
+	private JLabel inputInfo;
+	private JLabel line;
+	private JLabel secToNextPerson;
+	private JLabel avgSecondsCashier;
+	private JLabel totalTime;
+	private JLabel avgSecondsEatery;
+	private JLabel secBeforePersonLeaves;
+	private JLabel numOfEateries;
+	
+	private JTextField secToNextPersonLabel;
+	private JTextField avgSecondsCashierLabel;
+	private JTextField totalTimeLabel;
+	private JTextField avgSecondsEateryLabel;
+	private JTextField secBeforePersonLeavesLabel;
+	private JTextField numOfEateriesLabel;
+	
+	private JButton start;
+	private JButton stop;
+	
+	private JLabel outputInfo;
+	private JLabel line2;
+	
+	private JLabel throughput;
+	private JLabel throughput2;
+	
+	private JLabel avgTimePerson;
+	private JLabel avgTimePerson2;
+	
+	private JLabel numPeopleInLine;
+	private JLabel numPeopleInLine2;
+	
+	private JLabel maxQLengthCashier;
+	private JLabel maxQLengthCashier2;
+	
+	public DataGUI(){
 		
+		a = "";
+		b = "";
+		c = "";
+		d = "";
+		e = "";
+		f = "";
 		
+		/*
+		 * Stuff added from the sim class that was given
+		 */
 		Clock clk = new Clock();
-		booth = new Eatery();
+		Eatery booth = new Eatery();
 
-		// 		int numOfTicksNextPerson = 20 
+		//	    int numOfTicksNextPerson = 20
 		//      int averageBoothTime = 20
 		
 		PersonProducer produce = new PersonProducer(booth, 20, 18);	
 		clk.add(produce);
 		clk.add(booth);
 		
-		clk.run(10000);
+		clk.run(10000); 
 		
-		addInformation();
-		// addButtons();
-		addInfo();
-	}
-
-	public void addInformation() {
-		Info inputInfo;
-		Info outputInfo;
-
-		stats = new JPanel();
-		stats.setLayout(new BorderLayout());
-
-		String[] inputText = { "Input Information", "Seconds to the Next Person", "Average Seconds per Cashier",
-				"Total time in seconds", "Average Seconds per Eatery", "Seconds Before Person leaves",
-				"Number of Eateries" };
-
-		String[] outPutText = { "Output Information", "Throughput", "Average time for a Person from start to finish:",
-				"Number of people left line", "Max Q length cashier line" };
-
-		inputInfo = new Info(inputText, 5, 20, 30);
-		outputInfo = new Info(outPutText, 5, 80, 30);
-
-		inputInfo.setPreferredSize(new Dimension(100, 240));
-		outputInfo.setPreferredSize(new Dimension(100, 250));
-
-		stats.add(inputInfo, BorderLayout.NORTH);
-		stats.add(outputInfo, BorderLayout.CENTER);
-
-		stats.setPreferredSize(new Dimension(260, 550));
-		add(stats, BorderLayout.WEST);
-
-		labels = new JPanel();
-		labels.setLayout(new BorderLayout());
-
-		String[] outputText = {"------------------------------------------------------------...", booth.getThroughPut() + " people with Max = ___", "___ seconds", "__ people", "_" };
+		//BorderLayout used to organize the JPanels in the JFrame
+		this.setLayout(new BorderLayout());
 		
+		//Creating the input panel
+		input = new JPanel();
+		input.setLayout(new GridLayout(13, 2));
 		
-		outputInfo = new Info(outputText, 00, 40, 30);
-		labels.add(outputInfo, BorderLayout.CENTER);
-	}
+		inputInfo 	          = new JLabel("Input Information");
+		line                  = new JLabel("---------------------------------------");
+		secToNextPerson       = new JLabel("Seconds to the Next Person");
+		avgSecondsCashier     = new JLabel("Average Seconds per cashier");
+		totalTime             = new JLabel("Total time in seconds");
+		avgSecondsEatery      = new JLabel("Average Seconds per Eatery");
+		secBeforePersonLeaves = new JLabel("Seconds Before Person Leaves");
+		numOfEateries         = new JLabel("Number of Eateries");
+		
+		secToNextPersonLabel       = new JTextField();
+		avgSecondsCashierLabel     = new JTextField();
+		totalTimeLabel             = new JTextField();
+		avgSecondsEateryLabel      = new JTextField();
+		secBeforePersonLeavesLabel = new JTextField();
+		numOfEateriesLabel         = new JTextField();
+		
 
-	public void addInfo() {
-
-		FieldInfo field;
-
+		outputInfo         = new JLabel("Output Information");
+		line2              = new JLabel("---------------------------------------");
+		throughput         = new JLabel("Throughput ");
+		throughput2        = new JLabel(booth.getThroughPut() + " people with Max = 500");
+		avgTimePerson      = new JLabel("Average time for a Person from start to finish: " );
+		avgTimePerson2     = new JLabel( "ADD IN AVG SEC METHOD people");
+		numPeopleInLine    = new JLabel("Number of people left in line" );
+		numPeopleInLine2   = new JLabel("ADD IN PEOPLE LEFT IN LINE METHOD" + " people");
+		maxQLengthCashier  = new JLabel("Max Q length cashier line "); 
+		maxQLengthCashier2 = new JLabel(booth.getMaxQlength() + "");
+		
 		start = new JButton("Start Simulation");
+		start.addActionListener(this);
+		
+		stop = new JButton("Quit Simulation");
+		stop.addActionListener(this);
+		
+		this.add(input, BorderLayout.NORTH);
+		
+		input.add(inputInfo);
+		input.add(line);
+		input.add(secToNextPerson);
+		input.add(secToNextPersonLabel);
+		
+		input.add(avgSecondsCashier);
+		input.add(avgSecondsCashierLabel);
+		
+		input.add(totalTime);
+		input.add(totalTimeLabel);
+		
+		input.add(avgSecondsEatery);
+		input.add(avgSecondsEateryLabel);
+		
+		input.add(secBeforePersonLeaves);
+		input.add(secBeforePersonLeavesLabel);
+		
+		input.add(numOfEateries);
+		input.add(numOfEateriesLabel);
+		
+		input.add(start);
+		input.add(stop);
+		
+		input.add(outputInfo);
+		input.add(line2);
+		
+		input.add(throughput);
+		input.add(throughput2);
+		
+		input.add(avgTimePerson);
+		input.add(avgTimePerson2);
+		
+		input.add(numPeopleInLine);
+		input.add(numPeopleInLine2);
+		
+		input.add(maxQLengthCashier);
+		input.add(maxQLengthCashier2);
 		
 		
-		stop = new JButton("Stop Simulation");
 		
-		secondsToNextPerson = new JTextField(20);
-		averageSecondsCashier = new JTextField(20);
-		totalTime = new JTextField(20);
-		averageSecondsEatery = new JTextField(20);
-		secondsBeforePersonLeaves = new JTextField(20);
-		numberOfEateries = new JTextField(20);
-
-		JTextField[] labelArray = { secondsToNextPerson, averageSecondsCashier, totalTime, averageSecondsEatery,
-				secondsBeforePersonLeaves, numberOfEateries };
-
-		field = new FieldInfo(labelArray, start, stop);
-		//field.setPreferredSize(new Dimension(0, 5));
-
-		labels.add(field, BorderLayout.NORTH);
-		//labels.setPreferredSize(new Dimension(300, 30));
-		labels.setBorder(new EmptyBorder(37,0,0,0));
-
-		add(labels, BorderLayout.EAST);
-		
-		revalidate();
 	}
 
-	public static void main(String[] args) {
-		DataGUI g = new DataGUI();
-		g.setSize(650, 550);
-		// g.setResizable(false);
-		g.setVisible(true);
-		g.setTitle("Food Court Simulation");
-		g.setDefaultCloseOperation(EXIT_ON_CLOSE);
-	}
-
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == start){
-			System.out.println("Start");
+			this.a = secToNextPersonLabel.getText();    
+			this.b = avgSecondsCashierLabel.getText();    
+			this.c = totalTimeLabel.getText();              
+			this.d = avgSecondsEateryLabel .getText();      
+			this.e = secBeforePersonLeavesLabel.getText();  
+			this.f = numOfEateriesLabel.getText();  
+			try{
+				Integer.parseInt(this.a);
+				Integer.parseInt(this.b);
+				Integer.parseInt(this.c);
+				Integer.parseInt(this.d);
+				Integer.parseInt(this.e);
+				Integer.parseInt(this.f);
+			}
+			catch(Exception f){
+				JOptionPane.showMessageDialog(input , "Put in valid integers");
+			}
 		}
-		
-	}
-}
-
-class Info extends JPanel {
-	private String[] data;
-
-	private int x;
-
-	private int y;
-
-	private int increment;
-
-	public Info(String[] data, int x, int y, int increment) {
-		this.data = data;
-		this.x = x;
-		this.y = y;
-		this.increment = increment;
-	}
-
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		for (int i = 0; i < data.length; i++) {
-			g.drawString(data[i], x, i * increment + y);
+		if(e.getSource() == stop){
+			
 		}
 	}
-}
-
-class FieldInfo extends JPanel {
-	//private JButton start, stop;
-	
-	public FieldInfo(JTextField[] array, JButton start, JButton stop) {
-		//setSize(100,550);
-		GridLayout layout = new GridLayout(7, 1);
-
-		layout.setVgap(10);
-
-		setLayout(layout);
-		
-		
-		for (JTextField t : array) {
-			add(t);
-		}
-		
-		JPanel buttons = new JPanel();
-		buttons.setLayout(new GridLayout(1,2));
-		
-		start = new JButton("Start Simulation");
-		buttons.add(start);
-	
-		buttons.add(stop);
-		
-		add(buttons);
+	public static void main(String[] args){
+		DataGUI frame = new DataGUI();
+		frame.setTitle("Food Court Simulation");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setPreferredSize(new Dimension(600, 500));
+		frame.setResizable(false);
+		frame.pack();
+		frame.setVisible(true);
 	}
 }
