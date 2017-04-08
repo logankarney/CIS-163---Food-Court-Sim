@@ -34,9 +34,17 @@ public class Person {
 	public int getTickTime() {
 		return tickTime;
 	}
+	
+	public int getTickTime(){
+		return this.tickTime;
+	}
 
 	public void setTickTime(int tickTime) {
 		this.tickTime = tickTime;
+	}
+		
+	public int getEateryTime(){
+		return this.boothTime;
 	}
 
 	public void setEateryTime(double time) {
