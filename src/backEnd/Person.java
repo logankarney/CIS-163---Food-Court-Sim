@@ -18,6 +18,7 @@ public class Person {
 	
 	// max time person stays in line
 	protected double boothTime;
+	private int cashierTime;
 	
 	public Person(){
 	}
@@ -58,5 +59,13 @@ public class Person {
 
 	public void setEateryTime(double time) {
 		this.boothTime = time;
+	}
+	
+	public int getCashierTime(){
+		return this.cashierTime;
+	}
+	
+	public void setCashierTime(int cashierTime){
+		this.cashierTime = cashierTime;
 	}
 }
