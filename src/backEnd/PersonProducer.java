@@ -14,13 +14,12 @@ public class PersonProducer implements ClockListener {
 	private Eatery eatery;
 	private int numOfTicksNextPerson;
 	private int averageEateryTime;
+	private int cashierTime;
 	
 	private Random r = new Random();
 	
-	public PersonProducer(Eatery eatery, 
-			int numOfTicksNextPerson, 
-			int averageEateryTime) {
-		
+	public PersonProducer(Eatery eatery, int numOfTicksNextPerson, int averageEateryTime, int cashierTime) {
+		this.cashierTime = cashierTime;
 		this.eatery = eatery;
 		this.numOfTicksNextPerson = numOfTicksNextPerson;
 		this.averageEateryTime = averageEateryTime;
