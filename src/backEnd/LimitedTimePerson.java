@@ -1,6 +1,9 @@
 
 public class LimitedTimePerson extends Person{
-	public void LimitedTimePerson() {
-		type = TypeOfPerson.LIMITED_TIME;
-	}
+	public LimitedTimePerson(Person p){
+			super(p);
+			
+			setTickTime((int)(getTickTime() * 0.5));
+			setEateryTime(getEateryTime() * .5);
+		}
 }
