@@ -39,15 +39,16 @@ public class PersonProducer implements ClockListener {
 			person.setTickTime(tick);
 
 			// Determines what type of Person the customer will be
-			int rType = (int) (Math.random() * 100);
+			Random rand = new Random();
+			int rType = rand.nextInt(100 + 1);
 
 			Person customer = person;
 			if (rType < 70)
-				customer = new RegularPerson();
+				customer = new RegularPerson(person);
 			else if(rType < 90)
-				customer = new LimitedTimePerson();
+				customer = new LimitedTimePerson(person);
 			else
-				customer = new RegularPerson();
+				customer = new SpecialNeedsPerson(person);
 
 			eatery.add(customer);
 
