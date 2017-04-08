@@ -1,6 +1,10 @@
+package backEnd;
 
 public class LimitedTimePerson extends Person{
-	public void LimitedTimePerson() {
-		type = TypeOfPerson.LIMITED_TIME;
+		public LimitedTimePerson(){
+			super();
+			
+			setTickTime((int)(getTickTime() * 0.5));
+			setEateryTime(getEateryTime() * .5);
+		}
 	}
-}
