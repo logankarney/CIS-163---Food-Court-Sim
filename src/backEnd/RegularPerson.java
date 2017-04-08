@@ -1,8 +1,8 @@
 package backEnd;
 
 public class RegularPerson extends Person {
-	public RegularPerson(){
-		super();
+	public RegularPerson(Person p){
+		super(p);
 	}
 	
 }
