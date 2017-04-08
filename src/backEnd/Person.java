@@ -27,6 +27,7 @@ public class Person {
 		this.tickTime = p.tickTime;
 		this.Destination = p.Destination;
 		this.boothTime = p.boothTime;
+		this.cashierTime = p.cashierTime;
 	}
 	
 	public double getBoothTime() {
