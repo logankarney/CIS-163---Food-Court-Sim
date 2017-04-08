@@ -1,0 +1,14 @@
+package backEnd;
+
+public class SpecialNeedsPerson extends Person{
+	
+	public SpecialNeedsPerson(){
+		super();
+		
+		//setCashiersTime((getCashiersTime()*2));
+		setLeaveTime((getTickTime()*3));
+		//setEateryTIme((getEateryTime()*4));
+
+	}
+
+}
