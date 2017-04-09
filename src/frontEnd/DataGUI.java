@@ -24,13 +24,6 @@ import backEnd.PersonProducer;
 
 public class DataGUI extends JFrame implements ActionListener {
 
-	private String a;
-	private String b;
-	private String c;
-	private String d;
-	private String e;
-	private String f;
-
 	// input JPanel information
 	private JPanel input;
 
@@ -69,13 +62,6 @@ public class DataGUI extends JFrame implements ActionListener {
 	private JLabel maxQLengthCashier2;
 
 	public DataGUI() {
-
-		a = "";
-		b = "";
-		c = "";
-		d = "";
-		e = "";
-		f = "";
 
 		/*
 		 * Stuff added from the sim class that was given
