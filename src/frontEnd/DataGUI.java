@@ -68,6 +68,14 @@ public class DataGUI extends JFrame implements ActionListener {
 	private JMenu fileMenu;
 	private JMenuItem clearItem;
 	private JMenuItem quitItem;
+	
+	private JLabel empty;
+	private JLabel specialNeeds;
+	private JLabel limitedTime;
+	private JLabel regular;
+	private JLabel snStats;
+	private JLabel ltStats;
+	private JLabel regStats;
 
 	public DataGUI() {
 
@@ -91,7 +99,7 @@ public class DataGUI extends JFrame implements ActionListener {
 
 		// Creating the input panel
 		input = new JPanel();
-		input.setLayout(new GridLayout(13, 2));
+		input.setLayout(new GridLayout(20, 2));
 
 		inputInfo = new JLabel("Input Information");
 		line = new JLabel("---------------------------------------");
@@ -115,7 +123,7 @@ public class DataGUI extends JFrame implements ActionListener {
 
 		// throughput2 = new JLabel(booth.getThroughPut() + " people with Max =
 		// 500");
-		throughput2 = new JLabel("");
+		throughput2 = new JLabel("Total Time:" + " seconds");
 
 		avgTimePerson = new JLabel("Average time for a Person from start to finish: ");
 
@@ -138,6 +146,13 @@ public class DataGUI extends JFrame implements ActionListener {
 
 		stop = new JButton("Quit Simulation");
 		stop.addActionListener(this);
+		
+		specialNeeds = new JLabel("Special Needs Person Time:");
+		limitedTime = new JLabel("Limited Time Person Time:");
+		regular      = new JLabel("Regular Person Time:");
+		snStats      = new JLabel("seconds");
+		ltStats      = new JLabel("seconds");
+		regStats     = new JLabel("seconds");
 
 		this.add(input, BorderLayout.NORTH);
 
@@ -172,6 +187,15 @@ public class DataGUI extends JFrame implements ActionListener {
 
 		input.add(avgTimePerson);
 		input.add(avgTimePerson2);
+		
+		input.add(specialNeeds);
+		input.add(snStats);
+		
+		input.add(limitedTime);
+		input.add(ltStats);
+		
+		input.add(regular);
+		input.add(regStats);
 
 		input.add(numPeopleInLine);
 		input.add(numPeopleInLine2);
