@@ -42,10 +42,6 @@ public class Person {
 		Destination = destination;
 	}
 	
-	public int getTickTime() {
-		return tickTime;
-	}
-	
 	public int getTickTime(){
 		return this.tickTime;
 	}
