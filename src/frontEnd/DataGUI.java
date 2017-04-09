@@ -18,9 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import BackEnd.Clock;
-import BackEnd.Eatery;
-import BackEnd.PersonProducer;
+import backEnd.Clock;
+import backEnd.Eatery;
+import backEnd.PersonProducer;
 
 public class DataGUI extends JFrame implements ActionListener {
 	
@@ -86,7 +86,7 @@ public class DataGUI extends JFrame implements ActionListener {
 		//	    int numOfTicksNextPerson = 20
 		//      int averageBoothTime = 20
 		
-		PersonProducer produce = new PersonProducer(booth, 20, 18);	
+		PersonProducer produce = new PersonProducer(booth, 20, 18, 18);	
 		clk.add(produce);
 		clk.add(booth);
 		
