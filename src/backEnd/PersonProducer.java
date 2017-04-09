@@ -15,14 +15,16 @@ public class PersonProducer implements ClockListener {
 	private int numOfTicksNextPerson;
 	private int averageEateryTime;
 	private int cashierTime;
+	private Eatery destinationAfter;
 	
 	private Random r = new Random();
 	
-	public PersonProducer(Eatery eatery, int numOfTicksNextPerson, int averageEateryTime, int cashierTime) {
+	public PersonProducer(Eatery eatery, int numOfTicksNextPerson, int averageEateryTime, int cashierTime, Eatery destinationAfter) {
 		this.cashierTime = cashierTime;
 		this.eatery = eatery;
 		this.numOfTicksNextPerson = numOfTicksNextPerson;
 		this.averageEateryTime = averageEateryTime;
+		this.destinationAfter = destinationAfter;
 		//r.setSeed(13);    // This will cause the same random numbers
 	}
 	
@@ -52,7 +54,7 @@ public class PersonProducer implements ClockListener {
 
 			eatery.add(customer);
 
-			// person.setDestination(theLocationAfterTheEatery); // You can save
+			person.setDestination(destinationAfter); // You can save
 			// off where the person should go.
 		}
 	}

@@ -87,7 +87,7 @@ public class DataGUI extends JFrame implements ActionListener {
 		//	    int numOfTicksNextPerson = 20
 		//      int averageBoothTime = 20
 		
-		PersonProducer produce = new PersonProducer(booth, 20, 18, 18);	
+		PersonProducer produce = new PersonProducer(booth, 20, 18, 18, new Eatery());	
 		clk.add(produce);
 		clk.add(booth);
 		try {

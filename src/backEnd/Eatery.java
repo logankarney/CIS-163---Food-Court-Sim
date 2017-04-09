@@ -23,10 +23,10 @@ public class Eatery implements ClockListener {
 	
 	public void event (int tick) throws EmptyQException{
 		if (tick >= timeOfNextEvent) {
-//			if (person != null) { 			// Notice the delay that takes place here
-//				person.getDestination().add(person);    // take this person to the next station. 
-//			person = null;				// I have send the person on. 
-//			}
+			if (person != null) { 			// Notice the delay that takes place here
+				person.getDestination().add(person);    // take this person to the next station. 
+				person = null;				// I have send the person on. 
+			}
 			
 			if (Q.size() >= 1) {
 				person = Q.deQ();		// do not send this person as of yet, make them wait. 
