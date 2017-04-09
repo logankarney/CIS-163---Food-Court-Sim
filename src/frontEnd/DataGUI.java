@@ -13,6 +13,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -61,22 +64,27 @@ public class DataGUI extends JFrame implements ActionListener {
 	private JLabel maxQLengthCashier;
 	private JLabel maxQLengthCashier2;
 
+	private JMenuBar menu;
+	private JMenu fileMenu;
+	private JMenuItem clearItem;
+	private JMenuItem quitItem;
+
 	public DataGUI() {
 
 		/*
 		 * Stuff added from the sim class that was given
 		 */
-		//Clock clk = new Clock();
-		//Eatery booth = new Eatery();
+		// Clock clk = new Clock();
+		// Eatery booth = new Eatery();
 
 		// int numOfTicksNextPerson = 20
 		// int averageBoothTime = 20
 
-		//PersonProducer produce = new PersonProducer(booth, 20, 18, 18);
-		//clk.add(produce);
-		//clk.add(booth);
+		// PersonProducer produce = new PersonProducer(booth, 20, 18, 18);
+		// clk.add(produce);
+		// clk.add(booth);
 
-		//clk.run(10000);
+		// clk.run(10000);
 
 		// BorderLayout used to organize the JPanels in the JFrame
 		this.setLayout(new BorderLayout());
@@ -171,20 +179,34 @@ public class DataGUI extends JFrame implements ActionListener {
 		input.add(maxQLengthCashier);
 		input.add(maxQLengthCashier2);
 
+		menu = new JMenuBar();
+		fileMenu = new JMenu("File");
+		quitItem = new JMenuItem("Quit");
+		clearItem = new JMenuItem("Clear");
+
+		// adds action listeners
+
+		clearItem.addActionListener(this);
+		quitItem.addActionListener(this);
+
+		// adds items to menu
+		fileMenu.add(clearItem);
+		fileMenu.add(quitItem);
+
+		menu.add(fileMenu);
+		setJMenuBar(menu);
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == start) {
-			
+
 			int nextPersonTime;
 			int cashierTime;
 			int totalTime;
 			int avgEateryTime;
 			int secsBeforePersonLeaves;
 			int numEateries;
-			
-			
-			
+
 			try {
 				nextPersonTime = Integer.parseInt(secToNextPersonLabel.getText());
 				cashierTime = Integer.parseInt(avgSecondsCashierLabel.getText());
@@ -192,30 +214,40 @@ public class DataGUI extends JFrame implements ActionListener {
 				avgEateryTime = Integer.parseInt(avgSecondsEateryLabel.getText());
 				secsBeforePersonLeaves = Integer.parseInt(secBeforePersonLeavesLabel.getText());
 				numEateries = Integer.parseInt(numOfEateriesLabel.getText());
-				
-				//PUT FOODCOURTLOGIC CLASS HERE
+
+				// PUT FOODCOURTLOGIC CLASS HERE
 			}
-			
+
 			catch (Exception f) {
 				JOptionPane.showMessageDialog(input, "Put in valid integers");
 			}
-		}
-		if (e.getSource() == stop) {
-			
-			//FOODCOURTLOGIC OBJECT = NULL;
-			
+		} else if (e.getSource() == stop) {
+
+			// FOODCOURTLOGIC OBJECT = NULL;
+
 			throughput2.setText("");
 			avgTimePerson2.setText("");
 			numPeopleInLine2.setText("");
 			maxQLengthCashier2.setText("");
+		} else if (e.getSource() == clearItem) {
+			secToNextPersonLabel.setText("");
+			avgSecondsCashierLabel.setText("");
+			totalTimeLabel.setText("");
+			avgSecondsEateryLabel.setText("");
+			secBeforePersonLeavesLabel.setText("");
+			numOfEateriesLabel.setText("");
+			
+		} else if (e.getSource() == quitItem){
+			System.exit(1);
 		}
+
 	}
 
 	public static void main(String[] args) {
 		DataGUI frame = new DataGUI();
 		frame.setTitle("Food Court Simulation");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setPreferredSize(new Dimension(600, 500));
+		frame.setPreferredSize(new Dimension(700, 500));
 		frame.setResizable(false);
 		frame.pack();
 		frame.setVisible(true);
