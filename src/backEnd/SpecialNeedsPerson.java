@@ -10,5 +10,4 @@ public class SpecialNeedsPerson extends Person{
 		setEateryTime(getEateryTime() * 4);
 
 	}
-
 }
