@@ -14,13 +14,12 @@ public class PersonProducer implements ClockListener {
 	private Eatery eatery;
 	private int numOfTicksNextPerson;
 	private int averageEateryTime;
+	private int cashierTime;
 	
 	private Random r = new Random();
 	
-	public PersonProducer(Eatery eatery, 
-			int numOfTicksNextPerson, 
-			int averageEateryTime) {
-		
+	public PersonProducer(Eatery eatery, int numOfTicksNextPerson, int averageEateryTime, int cashierTime) {
+		this.cashierTime = cashierTime;
 		this.eatery = eatery;
 		this.numOfTicksNextPerson = numOfTicksNextPerson;
 		this.averageEateryTime = averageEateryTime;
@@ -36,6 +35,7 @@ public class PersonProducer implements ClockListener {
 			int rNumber = (int) (Math.random() * 100);
 
 			person.setEateryTime(averageEateryTime * 0.5 * r.nextGaussian() + averageEateryTime + .5);
+			person.setCashierTime(cashierTime);
 			person.setTickTime(tick);
 
 			// Determines what type of Person the customer will be
