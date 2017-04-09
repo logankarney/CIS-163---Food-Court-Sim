@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author   Roger Ferguson
  */
 public class Eatery implements ClockListener {
-	private ArrayList<Person> Q = new ArrayList<Person>();
+	private CIS163Q<Person> Q = new CIS163Q<Person>();
 	
 	private int timeOfNextEvent = 0;
 	private int maxQlength = 0;
@@ -16,12 +16,12 @@ public class Eatery implements ClockListener {
 	
 	public void add (Person person)
 	{
-		Q.add(person);
+		Q.enQ(person);
 		if (Q.size() > maxQlength)
 			maxQlength = Q.size();
 	}
 	
-	public void event (int tick){
+	public void event (int tick) throws EmptyQException{
 		if (tick >= timeOfNextEvent) {
 //			if (person != null) { 			// Notice the delay that takes place here
 //				person.getDestination().add(person);    // take this person to the next station. 
@@ -29,7 +29,7 @@ public class Eatery implements ClockListener {
 //			}
 			
 			if (Q.size() >= 1) {
-				person = Q.remove(0);		// do not send this person as of yet, make them wait. 
+				person = Q.deQ();		// do not send this person as of yet, make them wait. 
 				timeOfNextEvent = tick + (int) (person.getBoothTime() + 1);
 				completed++;										
 			}	

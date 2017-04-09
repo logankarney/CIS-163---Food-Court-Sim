@@ -17,7 +17,7 @@ public class Clock {
 		myListeners = new ClockListener[MAX];
 	}
 
-	public void run(int endingTime) {
+	public void run(int endingTime) throws EmptyQException{
 		for (int currentTime = 0; currentTime <= endingTime; currentTime++) {
 			for (int j = 0; j < numListeners; j++)
 				myListeners[j].event(currentTime);

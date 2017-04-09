@@ -21,7 +21,11 @@ public class Sim {
 			clk.add(produce);
 			clk.add(booth);
 			
-			clk.run(10000);
+			try {
+				clk.run(10000);
+			} catch (EmptyQException e) {
+				e.printStackTrace();
+			}
 			
 			System.out.println("Through put is: " + booth.getThroughPut() + " people.");
 			System.out.println("People that are still in the Q:" + booth.getLeft() + " people.");
