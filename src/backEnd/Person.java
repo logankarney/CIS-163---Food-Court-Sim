@@ -6,7 +6,7 @@ package backEnd;
 /**
  * @author   Roger Ferguson
  */
-public class Person {
+public class Person implements ClockListener{
 	
 	private enum TypeOfPerson {
 		LIMITED_TIME, SPECIAL_NEEDS, REGULAR
@@ -20,7 +20,11 @@ public class Person {
 	protected double boothTime;
 	private int cashierTime;
 	
+	//the amount of time a person has spent in the simulation
+	private int personalTime;
+	
 	public Person(){
+		personalTime = 0;
 	}
 	
 	public Person(Person p){
@@ -28,6 +32,7 @@ public class Person {
 		this.Destination = p.Destination;
 		this.boothTime = p.boothTime;
 		this.cashierTime = p.cashierTime;
+		personalTime = 0;
 	}
 	
 	public double getBoothTime() {
@@ -64,5 +69,14 @@ public class Person {
 	
 	public void setCashierTime(int cashierTime){
 		this.cashierTime = cashierTime;
+	}
+	
+	public int getPersonalTime(){
+		return personalTime;
+	}
+	
+	@Override
+	public void event(int tick) {
+		personalTime++;
 	}
 }
