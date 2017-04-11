@@ -11,19 +11,20 @@ public class Clock {
 	private ClockListener[] myListeners;
 	private int numListeners;
 	private int MAX = 100;
-	private int endTime;
+	private boolean hasEnded;
 
 	public Clock() {
 		numListeners = 0;
 		myListeners = new ClockListener[MAX];
+		hasEnded = false;
 	}
 
 	public void run(int endingTime) {
-		this.endTime = endingTime;
 		for (int currentTime = 0; currentTime <= endingTime; currentTime++) {
 			for (int j = 0; j < numListeners; j++)
 				myListeners[j].event(currentTime);
 		}
+		hasEnded = true;
 	}
 
 	public void add(ClockListener cl) {
@@ -50,8 +51,8 @@ public class Clock {
 	public int getMAX() {
 		return MAX;
 	}
-	public int getEndTime(){
-		return endTime;
+	public boolean getHasEnded(){
+		return hasEnded;
 	}
 
 }
