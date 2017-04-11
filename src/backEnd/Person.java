@@ -32,6 +32,7 @@ public class Person implements ClockListener{
 	
 	public Person(){
 		personalTime = 0;
+		quitTime = 0;
 	}
 	
 	public Person(Person p){
@@ -97,8 +98,12 @@ public class Person implements ClockListener{
 	}
 	
 	public boolean shouldLeaveLine(){
-		if(quitTime < personalTime)
+		if(quitTime < personalTime) {
+			this.boothTime = 0;
+			this.cashierTime = 0;
+			this.personalTime = 0;
 			return true;
+		}
 		return false;
 	}
 	
