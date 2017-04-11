@@ -106,7 +106,7 @@ public class Person implements ClockListener{
 		return this.quitTime;
 	}
 	
-	public vpod setQuitTime(int quitTime){
+	public void setQuitTime(int quitTime){
 		this.quitTime = quitTime;
 	}
 }
