@@ -13,6 +13,7 @@ public class Eatery implements ClockListener {
 	protected int maxQlength = 0;
 	protected Person person;   // this is the person at the Eatery. 
 	protected int completed = 0;
+	protected int personLeftLine = 0;
 	protected boolean isServicing = false;
 	
 	public void add (Person person)
@@ -37,7 +38,10 @@ public class Eatery implements ClockListener {
 				person = Q.deQ();		// do not send this person as of yet, make them wait. 
 				timeOfNextEvent = tick + (int) (person.getBoothTime() + 1);
 				isServicing = true;
-				completed++;										
+				if(!person.shouldLeaveLine)
+					completed++;	
+				else
+					personLeftLine++;
 			}	
 		}
 	}
@@ -59,6 +63,10 @@ public class Eatery implements ClockListener {
 
 	public int getThroughPut() {
 		return completed;
+	}
+	
+	public int getPeopleFailed(){
+		return personLeftLine;
 	}
 	
 	public boolean isServicing() {

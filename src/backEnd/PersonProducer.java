@@ -17,17 +17,22 @@ public class PersonProducer implements ClockListener {
 	private int numOfTicksNextPerson;
 	private int averageEateryTime;
 	private int cashierTime;
+
+	private int quitTime;
+
 	private Eatery destinationAfter;
 	
 	private Random r = new Random();
 	
-	public PersonProducer(ArrayList<Eatery> eateries, int numOfTicksNextPerson, int averageEateryTime, int cashierTime, Eatery destinationAfter) {
+	public PersonProducer(ArrayList<Eatery> eateries, int numOfTicksNextPerson, int averageEateryTime, int cashierTime, Eatery destinationAfter, int quitTime) {
 		this.cashierTime = cashierTime;
 		this.eateries = eateries;
 		//this.eatery = eatery;
 		this.numOfTicksNextPerson = numOfTicksNextPerson;
 		this.averageEateryTime = averageEateryTime;
 		this.destinationAfter = destinationAfter;
+		this.quitTime = quitTime;
+
 		//r.setSeed(13);    // This will cause the same random numbers
 	}
 	
@@ -36,11 +41,18 @@ public class PersonProducer implements ClockListener {
 			nextPerson = tick + numOfTicksNextPerson;
 
 			Person person = new Person();
+			
+			Random rand;
 
-			int rNumber = (int) (Math.random() * 100);
+			int rNumber = rand.nextInt((2 + 1 - 2) - 2);
 
 			person.setEateryTime(averageEateryTime * 0.5 * r.nextGaussian() + averageEateryTime + .5);
-			person.setCashierTime(cashierTime);
+			person.setCashierTime(cashierTime + rNumber); 
+			
+			rNumber = rand.nextInt((5 + 1 - 5) - 5);
+			
+			person.setQuitTime(quitTime + rNumber);//set leave time random
+
 			person.setTickTime(tick);
 
 			// Determines what type of Person the customer will be
