@@ -42,7 +42,6 @@ public class Eatery implements ClockListener {
 					completed++;	
 				else
 					personLeftLine++;
-													
 			}	
 		}
 	}
