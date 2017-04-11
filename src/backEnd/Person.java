@@ -23,6 +23,10 @@ public class Person implements ClockListener{
 	//the amount of time a person has spent in the simulation
 	private int personalTime;
 	
+	private TypeOfPerson type;
+	
+	private boolean queueed;
+	
 	public Person(){
 		personalTime = 0;
 	}
@@ -78,5 +82,13 @@ public class Person implements ClockListener{
 	@Override
 	public void event(int tick) {
 		personalTime++;
+	}
+	
+	public void setQueue(boolean queueed){
+		this.queueed = queueed;
+	}
+	
+	public boolean getQueue(){
+		return this.queueed;
 	}
 }
