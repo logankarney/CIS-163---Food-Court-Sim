@@ -3,6 +3,7 @@
  */
 package backEnd;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -11,7 +12,8 @@ import java.util.Random;
 public class PersonProducer implements ClockListener {
 	
 	private int nextPerson = 0;
-	private Eatery eatery;
+	private ArrayList<Eatery> eateries;
+	//private Eatery eatery;
 	private int numOfTicksNextPerson;
 	private int averageEateryTime;
 	private int cashierTime;
@@ -22,11 +24,10 @@ public class PersonProducer implements ClockListener {
 	
 	private Random r = new Random();
 	
-
-	public PersonProducer(Eatery eatery, int numOfTicksNextPerson, int averageEateryTime, int cashierTime, Eatery destinationAfter, int quitTime) {
-    
+	public PersonProducer(ArrayList<Eatery> eateries, int numOfTicksNextPerson, int averageEateryTime, int cashierTime, Eatery destinationAfter, int quitTime) {
 		this.cashierTime = cashierTime;
-		this.eatery = eatery;
+		this.eateries = eateries;
+		//this.eatery = eatery;
 		this.numOfTicksNextPerson = numOfTicksNextPerson;
 		this.averageEateryTime = averageEateryTime;
 		this.destinationAfter = destinationAfter;
@@ -65,8 +66,9 @@ public class PersonProducer implements ClockListener {
 				customer = new LimitedTimePerson(person);
 			else
 				customer = new SpecialNeedsPerson(person);
-
-			eatery.add(customer);
+			
+			this.eateries.get(rand.nextInt(eateries.size())).add(customer);;
+			//eatery.add(customer);
 
 			customer.setDestination(destinationAfter); // You can save
 			// off where the person should go.

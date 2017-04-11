@@ -5,26 +5,29 @@ import java.util.ArrayList;
 public class FoodCourtLogic {
 	private Clock clk;
 	public ArrayList<Eatery> eateries;
-	private ArrayList<PersonProducer> producers;
+	private PersonProducer producer;
+	//private ArrayList<PersonProducer> producers;
 	private PayLine payLine;
 	private ArrayList<Cashier> checkOut;
 	
-	public FoodCourtLogic() {
+	public FoodCourtLogic(int numTicksPerPerson, int averageEateryTime, int averageCashierTime) {
 		clk = new Clock();
 		eateries = new ArrayList<Eatery>();
-		producers = new ArrayList<PersonProducer>();
+		
 		checkOut = new ArrayList<Cashier>();
 		payLine = new PayLine(checkOut);
+		producer = new PersonProducer(eateries, numTicksPerPerson, averageEateryTime, averageCashierTime, payLine);
+		//producers = new ArrayList<PersonProducer>();
 		clk.add(payLine);
+		clk.add(producer);
 	}
 	
 	public void addEatery() {
 		Eatery e = new Eatery();
+		//PersonProducer pp = new PersonProducer(e, 20, 18, 18, payLine);
 		eateries.add(e);
-		PersonProducer pp = new PersonProducer(e, 20, 18, 18, payLine);
-		producers.add(pp);
+		//clk.add(pp);
 		clk.add(e);
-		clk.add(pp);
 	}
 	
 	public void addCheckOut() {
@@ -46,12 +49,9 @@ public class FoodCourtLogic {
 	}
 	
 	public static void main(String[] args) {
-		FoodCourtLogic fcl = new FoodCourtLogic();
+		FoodCourtLogic fcl = new FoodCourtLogic(10, 30, 30);
 		fcl.addCheckOut();
 		fcl.addCheckOut();
-		fcl.addCheckOut();
-		fcl.addCheckOut();
-		fcl.addEatery();
 		fcl.addEatery();
 		fcl.addEatery();
 		try {
