@@ -23,6 +23,7 @@ import javax.swing.border.EmptyBorder;
 
 import backEnd.Clock;
 import backEnd.Eatery;
+import backEnd.EmptyQException;
 import backEnd.PersonProducer;
 
 public class DataGUI extends JFrame implements ActionListener {
@@ -85,6 +86,19 @@ public class DataGUI extends JFrame implements ActionListener {
 		// Clock clk = new Clock();
 		// Eatery booth = new Eatery();
 
+		//	    int numOfTicksNextPerson = 20
+		//      int averageBoothTime = 20
+		
+		PersonProducer produce = new PersonProducer(booth, 20, 18, 18, new Eatery(), 150);	
+		clk.add(produce);
+		clk.add(booth);
+		try {
+			clk.run(10000); 
+		} catch (EmptyQException e){
+			JOptionPane.showMessageDialog(this, "Queue is empty.");
+		}
+		//BorderLayout used to organize the JPanels in the JFrame
+
 		// int numOfTicksNextPerson = 20
 		// int averageBoothTime = 20
 
@@ -95,6 +109,7 @@ public class DataGUI extends JFrame implements ActionListener {
 		// clk.run(10000);
 
 		// BorderLayout used to organize the JPanels in the JFrame
+
 		this.setLayout(new BorderLayout());
 
 		// Creating the input panel

@@ -15,18 +15,23 @@ public class PersonProducer implements ClockListener {
 	private int numOfTicksNextPerson;
 	private int averageEateryTime;
 	private int cashierTime;
+
 	private int quitTime;
+
 	private Eatery destinationAfter;
 	
 	private Random r = new Random();
 	
+
 	public PersonProducer(Eatery eatery, int numOfTicksNextPerson, int averageEateryTime, int cashierTime, Eatery destinationAfter, int quitTime) {
+    
 		this.cashierTime = cashierTime;
 		this.eatery = eatery;
 		this.numOfTicksNextPerson = numOfTicksNextPerson;
 		this.averageEateryTime = averageEateryTime;
 		this.destinationAfter = destinationAfter;
 		this.quitTime = quitTime;
+
 		//r.setSeed(13);    // This will cause the same random numbers
 	}
 	

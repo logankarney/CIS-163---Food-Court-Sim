@@ -1,5 +1,5 @@
 package backEnd;
 
 public interface ClockListener {
-	public void event(int tick);
+	public void event(int tick) throws EmptyQException;
 }
