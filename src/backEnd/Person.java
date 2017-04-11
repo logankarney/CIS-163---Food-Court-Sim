@@ -101,4 +101,12 @@ public class Person implements ClockListener{
 			return true;
 		return false;
 	}
+	
+	public int getQuitTime(){
+		return this.quitTime;
+	}
+	
+	public vpod setQuitTime(int quitTime){
+		this.quitTime = quitTime;
+	}
 }
