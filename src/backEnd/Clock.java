@@ -11,6 +11,7 @@ public class Clock {
 	private ClockListener[] myListeners;
 	private int numListeners;
 	private int MAX = 100;
+	private int endTime;
 
 	public Clock() {
 		numListeners = 0;
@@ -18,6 +19,7 @@ public class Clock {
 	}
 
 	public void run(int endingTime) {
+		this.endTime = endingTime;
 		for (int currentTime = 0; currentTime <= endingTime; currentTime++) {
 			for (int j = 0; j < numListeners; j++)
 				myListeners[j].event(currentTime);
@@ -47,6 +49,9 @@ public class Clock {
 
 	public int getMAX() {
 		return MAX;
+	}
+	public int getEndTime(){
+		return endTime;
 	}
 
 }
