@@ -11,10 +11,12 @@ public class Clock {
 	private ClockListener[] myListeners;
 	private int numListeners;
 	private int MAX = 100;
+	private boolean hasEnded;
 
 	public Clock() {
 		numListeners = 0;
 		myListeners = new ClockListener[MAX];
+		hasEnded = false;
 	}
 
 	public void run(int endingTime) throws EmptyQException{
@@ -28,6 +30,7 @@ public class Clock {
 				e.printStackTrace();
 			}
 		}
+		hasEnded = true;
 	}
 
 	public void add(ClockListener cl) {
@@ -53,6 +56,9 @@ public class Clock {
 
 	public int getMAX() {
 		return MAX;
+	}
+	public boolean getHasEnded(){
+		return hasEnded;
 	}
 
 }
