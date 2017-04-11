@@ -54,7 +54,7 @@ public class PersonProducer implements ClockListener {
 
 			eatery.add(customer);
 
-			person.setDestination(destinationAfter); // You can save
+			customer.setDestination(destinationAfter); // You can save
 			// off where the person should go.
 		}
 	}

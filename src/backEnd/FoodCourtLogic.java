@@ -4,17 +4,18 @@ import java.util.ArrayList;
 
 public class FoodCourtLogic {
 	private Clock clk;
-	private ArrayList<Eatery> eateries;
+	public ArrayList<Eatery> eateries;
 	private ArrayList<PersonProducer> producers;
 	private PayLine payLine;
-	private ArrayList<Eatery> checkOut;
+	private ArrayList<Cashier> checkOut;
 	
 	public FoodCourtLogic() {
 		clk = new Clock();
 		eateries = new ArrayList<Eatery>();
 		producers = new ArrayList<PersonProducer>();
-		checkOut = new ArrayList<Eatery>();
+		checkOut = new ArrayList<Cashier>();
 		payLine = new PayLine(checkOut);
+		clk.add(payLine);
 	}
 	
 	public void addEatery() {
@@ -27,11 +28,13 @@ public class FoodCourtLogic {
 	}
 	
 	public void addCheckOut() {
-		checkOut.add(new Eatery());
+		Cashier c = new Cashier();
+		checkOut.add(c);
+		clk.add(c);
 	}
 	
-	public void run() throws EmptyQException {
-		clk.run(10000);
+	public void run(int endTime) throws EmptyQException {
+		clk.run(endTime);
 	}
 	
 	public int getThroughput() {
@@ -46,16 +49,20 @@ public class FoodCourtLogic {
 		FoodCourtLogic fcl = new FoodCourtLogic();
 		fcl.addCheckOut();
 		fcl.addCheckOut();
+		fcl.addCheckOut();
+		fcl.addCheckOut();
 		fcl.addEatery();
 		fcl.addEatery();
 		fcl.addEatery();
 		try {
-			fcl.run();
+			fcl.run(100000);
 		}
 		catch(EmptyQException e) {
 			e.printStackTrace();
 		}
 		
 		System.out.println("Throughput: " + fcl.getThroughput());
+		System.out.println("Throughput Pay: " + fcl.payLine.getThroughPut());
+		System.out.println("Percent through check out 1: " + (double)fcl.checkOut.get(0).getThroughPut() / fcl.getThroughput());
 	}
 }
