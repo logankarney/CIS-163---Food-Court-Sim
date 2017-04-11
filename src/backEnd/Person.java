@@ -23,6 +23,9 @@ public class Person implements ClockListener{
 	//the amount of time a person has spent in the simulation
 	private int personalTime;
 	
+	//how many ticks till a person gets fed up and leaves
+	private int quitTime;
+	
 	private TypeOfPerson type;
 	
 	private boolean queueed;
@@ -36,7 +39,8 @@ public class Person implements ClockListener{
 		this.Destination = p.Destination;
 		this.boothTime = p.boothTime;
 		this.cashierTime = p.cashierTime;
-		personalTime = 0;
+		this.personalTime = 0;
+		this.quitTime = 100;
 	}
 	
 	public double getBoothTime() {
@@ -90,5 +94,11 @@ public class Person implements ClockListener{
 	
 	public boolean getQueue(){
 		return this.queueed;
+	}
+	
+	public boolean shouldLeaveLine(){
+		if(quitTime < personalTime)
+			return true;
+		return false;
 	}
 }
