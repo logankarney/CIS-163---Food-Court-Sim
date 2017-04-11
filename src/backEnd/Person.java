@@ -40,7 +40,7 @@ public class Person implements ClockListener{
 		this.boothTime = p.boothTime;
 		this.cashierTime = p.cashierTime;
 		this.personalTime = 0;
-		this.quitTime = 100;
+		this.quitTime = p.quitTime;
 	}
 	
 	public double getBoothTime() {
