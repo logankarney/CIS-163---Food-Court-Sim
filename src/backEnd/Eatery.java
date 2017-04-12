@@ -38,7 +38,7 @@ public class Eatery implements ClockListener {
 				person = Q.deQ();		// do not send this person as of yet, make them wait. 
 				timeOfNextEvent = tick + (int) (person.getBoothTime() + 1);
 				isServicing = true;
-				if(!person.shouldLeaveLine)
+				if(!person.shouldLeaveLine())
 					completed++;	
 				else
 					personLeftLine++;

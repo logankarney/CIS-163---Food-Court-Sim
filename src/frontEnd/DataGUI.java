@@ -279,7 +279,7 @@ public class DataGUI extends JFrame implements ActionListener {
 					snStats.setText("seconds");
 					ltStats.setText("seconds");
 					regStats.setText("seconds");
-					if(clk.getHasEnded())
+					if(booth.)
 						break;
 			}
 		} else if (e.getSource() == stop) {

@@ -9,14 +9,15 @@ public class FoodCourtLogic {
 	//private ArrayList<PersonProducer> producers;
 	private PayLine payLine;
 	private ArrayList<Cashier> checkOut;
+	private int quitTime;
 	
-	public FoodCourtLogic(int numTicksPerPerson, int averageEateryTime, int averageCashierTime) {
+	public FoodCourtLogic(int numTicksPerPerson, int averageEateryTime, int averageCashierTime, int quitTime) {
 		clk = new Clock();
 		eateries = new ArrayList<Eatery>();
-		
+		this.quitTime = quitTime;
 		checkOut = new ArrayList<Cashier>();
 		payLine = new PayLine(checkOut);
-		producer = new PersonProducer(eateries, numTicksPerPerson, averageEateryTime, averageCashierTime, payLine);
+		producer = new PersonProducer(eateries, numTicksPerPerson, averageEateryTime, averageCashierTime, payLine, quitTime);
 		//producers = new ArrayList<PersonProducer>();
 		clk.add(payLine);
 		clk.add(producer);
@@ -36,8 +37,8 @@ public class FoodCourtLogic {
 		clk.add(c);
 	}
 	
-	public void run(int endTime) throws EmptyQException {
-		clk.run(endTime);
+	public void run() throws EmptyQException {
+		clk.run(quitTime);
 	}
 	
 	public int getThroughput() {
@@ -49,13 +50,13 @@ public class FoodCourtLogic {
 	}
 	
 	public static void main(String[] args) {
-		FoodCourtLogic fcl = new FoodCourtLogic(10, 30, 30);
+		FoodCourtLogic fcl = new FoodCourtLogic(10, 30, 30, 100000);
 		fcl.addCheckOut();
 		fcl.addCheckOut();
 		fcl.addEatery();
 		fcl.addEatery();
 		try {
-			fcl.run(100000);
+			fcl.run();
 		}
 		catch(EmptyQException e) {
 			e.printStackTrace();

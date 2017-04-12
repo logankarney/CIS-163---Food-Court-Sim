@@ -8,11 +8,11 @@ package backEnd;
  */
 public class Person implements ClockListener{
 	
-	private enum TypeOfPerson {
+	public enum TypeOfPerson {
 		LIMITED_TIME, SPECIAL_NEEDS, REGULAR
 	}
 	
-	private TypeOfPerson type;
+	protected TypeOfPerson type;
 	private int tickTime;
 	private Eatery Destination;
 	
@@ -25,8 +25,6 @@ public class Person implements ClockListener{
 	
 	//how many ticks till a person gets fed up and leaves
 	private int quitTime;
-	
-	private TypeOfPerson type;
 	
 	private boolean queueed;
 	
