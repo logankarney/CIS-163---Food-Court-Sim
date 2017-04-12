@@ -42,21 +42,26 @@ public class PersonProducer implements ClockListener {
 
 			Person person = new Person();
 			
-			Random rand;
+			Random rand = new Random();
 
-			int rNumber = rand.nextInt((2 + 1 - 2) - 2);
+			int rNumber = rand.nextInt(3);
+			boolean positive = rand.nextBoolean();
+			if(!positive)
+				rNumber *= -1;
 
 			person.setEateryTime(averageEateryTime * 0.5 * r.nextGaussian() + averageEateryTime + .5);
 			person.setCashierTime(cashierTime + rNumber); 
 			
-			rNumber = rand.nextInt((5 + 1 - 5) - 5);
+			rNumber = rand.nextInt(6);
+			positive = rand.nextBoolean();
+			if(!positive)
+				rNumber *= -1;
 			
 			person.setQuitTime(quitTime + rNumber);//set leave time random
 
 			person.setTickTime(tick);
 
 			// Determines what type of Person the customer will be
-			Random rand = new Random();
 			int rType = rand.nextInt(100 + 1);
 
 			Person customer = person;

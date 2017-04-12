@@ -7,16 +7,17 @@ package backEnd;
  * @author   Roger Ferguson
  */
 public class Person implements ClockListener{
-	
-	/** Enum that describes what type of person the object will be**/
-	private enum TypeOfPerson {
+
+  /** Enum that describes what type of person the object will be**/
+	public enum TypeOfPerson {
 		LIMITED_TIME, SPECIAL_NEEDS, REGULAR
 	}
 	
-	/** instance variable of the object's enum type **/
-	private TypeOfPerson type;
-	
-	/** objects clock time **/
+  /** instance variable of the object's enum type **/
+	protected TypeOfPerson type;
+
+  
+  /** objects clock time **/
 	private int tickTime;
 	
 	/** the person's destination **/
@@ -34,10 +35,11 @@ public class Person implements ClockListener{
 	/** how many ticks till a person gets fed up and leaves **/
 	private int quitTime;
 	
+
 	/***
 	* Creates a empty Person object
 	*
-	***/
+  **/
 	public Person(){
 		personalTime = 0;
 		quitTime = 0;
