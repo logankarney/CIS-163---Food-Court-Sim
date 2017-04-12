@@ -9,10 +9,6 @@ public class Cashier extends Eatery{
 	private int snTotTime = 0;
 	private int ltTotTime = 0;
 	
-	private int rCount = 0;
-	private int snCount = 0;
-	private int ltCount = 0;
-	
 	public void add(Person p) {
 		Q.enQ(p);
 		if (Q.size() > maxQlength)
@@ -34,6 +30,7 @@ public class Cashier extends Eatery{
 					ltTotTime += tick - person.getTickTime();
 				else if(person.type == TypeOfPerson.SPECIAL_NEEDS)
 					snTotTime += tick - person.getTickTime();
+				addToAverage(tick - eateryTickTime);
 				person = null;				// I have send the person on. 
 				isServicing = false;
 			}
@@ -42,13 +39,8 @@ public class Cashier extends Eatery{
 				person = Q.deQ();		// do not send this person as of yet, make them wait.
 				isServicing = true;
 				timeOfNextEvent = tick + (int) (person.getCashierTime() + 1);
+				eateryTickTime = tick;
 				completed++;
-				if(person.type == TypeOfPerson.REGULAR)
-					rCount++;
-				else if(person.type == TypeOfPerson.LIMITED_TIME) 
-					ltCount++;
-				else if(person.type == TypeOfPerson.SPECIAL_NEEDS)
-					snCount++;
 			}	
 		}
 			//System.out.println("Cashier Completed: " + completed);
@@ -58,27 +50,15 @@ public class Cashier extends Eatery{
 		return totalTime;
 	}
 	
-	public int getRCount() {
-		return rCount;
-	}
-	
-	public int getSNCount() {
-		return snCount;
-	}
-	
-	public int getLTCount() {
-		return ltCount;
-	}
-	
-	public int getRTime() {
+	public int getRTotTime() {
 		return rTotTime;
 	}
 	
-	public int getSNTime() {
+	public int getSNTotTime() {
 		return snTotTime;
 	}
 	
-	public int getLTTime() {
+	public int getLTTotTime() {
 		return ltTotTime;
 	}
 }

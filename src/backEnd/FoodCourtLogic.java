@@ -11,12 +11,14 @@ public class FoodCourtLogic {
 	private ArrayList<Cashier> checkOut;
 	private int quitTime;
 	private boolean end;
+	private int numTicksPerPerson;
+	
 
 	public FoodCourtLogic(int numTicksPerPerson, int averageEateryTime, int averageCashierTime, int quitTime) {
 		this.end = true;
 		clk = new Clock();
 		eateries = new ArrayList<Eatery>();
-
+		this.numTicksPerPerson = numTicksPerPerson;
 		this.quitTime = quitTime;
 		checkOut = new ArrayList<Cashier>();
 		payLine = new PayLine(checkOut);
@@ -63,7 +65,7 @@ public class FoodCourtLogic {
 		clk.add(c);
 	}
 
-	public void run(int endTime) throws EmptyQException {
+	public void run() throws EmptyQException {
 		clk.run(quitTime);
 		end = false;
 	}
@@ -76,6 +78,10 @@ public class FoodCourtLogic {
 		return throughput;
 	}
 	
+	public int getMaxThrougput() {
+		return quitTime / numTicksPerPerson;
+	}
+	
 	public boolean getEnd(){
 		return end;
 	}
@@ -84,7 +90,7 @@ public class FoodCourtLogic {
 		double m = 0;
 		int rCount = 0;
 		for(int i = 0; i < checkOut.size(); i++){
-			m += checkOut.get(i).getRTime();
+			m += checkOut.get(i).getRTotTime();
 			rCount += checkOut.get(i).getRCount();
 		}
 		return m / rCount;
@@ -94,7 +100,7 @@ public class FoodCourtLogic {
 		double m = 0;
 		int snCount = 0;
 		for(int i = 0; i < checkOut.size(); i++){
-			m += checkOut.get(i).getSNTime();
+			m += checkOut.get(i).getSNTotTime();
 			snCount += checkOut.get(i).getSNCount();
 		}
 		return m / snCount;
@@ -104,14 +110,98 @@ public class FoodCourtLogic {
 		double m = 0;
 		int ltCount = 0;
 		for(int i = 0; i < checkOut.size(); i++){
-			m += checkOut.get(i).getLTTime();
+			m += checkOut.get(i).getLTTotTime();
 			ltCount += checkOut.get(i).getLTCount();
 		}
 		return m / ltCount;
 	}
 	
+	public int getRCount() {
+		int m = 0;
+		for(int i = 0; i < checkOut.size(); i++) {
+			m += checkOut.get(i).getRCount();
+		}
+		return m;
+	}
+	
+	public int getLTCount() {
+		int m = 0;
+		for(int i = 0; i < checkOut.size(); i++) {
+			m += checkOut.get(i).getLTCount();
+		}
+		return m;
+	}
+	
+	public int getSNCount() {
+		int m = 0;
+		for(int i = 0; i < checkOut.size(); i++) {
+			m += checkOut.get(i).getSNCount();
+		}
+		return m;
+	}
+	
+	public double getREateryTime() {
+		int m = 0;
+		int totTime = 0;
+		for(Eatery e: eateries) {
+			m += e.getRCount();
+			totTime += e.getRTime();
+		}
+		return (double) totTime / m;
+	}
+	
+	public double getSNEateryTime() {
+		int m = 0;
+		int totTime = 0;
+		for(Eatery e: eateries) {
+			m += e.getSNCount();
+			totTime += e.getSNTime();
+		}
+		return (double) totTime / m;
+	}
+	
+	public double getLTEateryTime() {
+		int m = 0;
+		int totTime = 0;
+		for(Eatery e: eateries) {
+			m += e.getLTCount();
+			totTime += e.getLTTime();
+		}
+		return (double) totTime / m;
+	}
+	
+	public double getRCashierTime() {
+		int m = 0;
+		int totTime = 0;
+		for(Cashier c: checkOut) {
+			m += c.getRCount();
+			totTime += c.getRTime();
+		}
+		return (double) totTime / m;
+	}
+	
+	public double getSNCashierTime() {
+		int m = 0;
+		int totTime = 0;
+		for(Cashier c: checkOut) {
+			m += c.getSNCount();
+			totTime += c.getSNTime();
+		}
+		return (double) totTime / m;
+	}
+	
+	public double getLTCashierTime() {
+		int m = 0;
+		int totTime = 0;
+		for(Cashier c: checkOut) {
+			m += c.getLTCount();
+			totTime += c.getLTTime();
+		}
+		return (double) totTime / m;
+	}
+	
 	public static void main(String[] args) {
-		FoodCourtLogic fcl = new FoodCourtLogic(10, 30, 30, 1000000);
+		FoodCourtLogic fcl = new FoodCourtLogic(10, 30, 30, 10000);
 		fcl.addCheckOut();
 		fcl.addCheckOut();
 		fcl.addEatery();
@@ -119,7 +209,7 @@ public class FoodCourtLogic {
 		fcl.addEatery();
 		fcl.addEatery();
 		try {
-			fcl.run(1000);
+			fcl.run();
 		}
 		catch(EmptyQException e) {
 			e.printStackTrace();
