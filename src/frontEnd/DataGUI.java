@@ -29,7 +29,7 @@ import backEnd.PersonProducer;
 public class DataGUI extends JFrame implements ActionListener {
 
 	private Clock clk;
-	private Eatery booth;
+	private FoodCourtLogic booth;
 
 	// input JPanel information
 	private JPanel input;
@@ -87,7 +87,6 @@ public class DataGUI extends JFrame implements ActionListener {
 		 * Stuff added from the sim class that was given
 		 */
 		clk = new Clock();
-		booth = new Eatery();
 
 		// int numOfTicksNextPerson = 20
 		// int averageBoothTime = 20
@@ -253,9 +252,11 @@ public class DataGUI extends JFrame implements ActionListener {
 				}
 				while(true){
 					
-					clk.run(totalTime);
+					booth = new FoodCourtLogic(nextPersonTime, avgEateryTime, cashierTime);
+					booth.run(totalTime);
 					for(int i = 0; i < numEateries; i++){
-						
+						booth.addEatery();
+						i++;
 					}
 					// PUT FOODCOURTLOGIC CLASS HERE
 					
@@ -271,10 +272,10 @@ public class DataGUI extends JFrame implements ActionListener {
 					//	return completed;
 					//}
 					
-					throughput2.setText("Total Time: " + booth.getThroughPut() + " seconds");
+					throughput2.setText("Total Time: " + booth.getThroughput() + " seconds");
 					avgTimePerson2.setText("seconds");
-					numPeopleInLine2.setText(booth.getLeft() + " people");
-					maxQLengthCashier2.setText(booth.getMaxQlength() + " people");
+					numPeopleInLine2.setText(" people");
+					maxQLengthCashier2.setText(" people");
 					snStats.setText("seconds");
 					ltStats.setText("seconds");
 					regStats.setText("seconds");
