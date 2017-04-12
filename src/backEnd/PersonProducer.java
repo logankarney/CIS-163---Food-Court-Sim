@@ -17,14 +17,14 @@ public class PersonProducer implements ClockListener {
 	private int numOfTicksNextPerson;
 	private int averageEateryTime;
 	private int cashierTime;
-
 	private int quitTime;
 
 	private Eatery destinationAfter;
 	
 	private Random r = new Random();
 	
-	public PersonProducer(ArrayList<Eatery> eateries, int numOfTicksNextPerson, int averageEateryTime, int cashierTime, Eatery destinationAfter, int quitTime) {
+	public PersonProducer(ArrayList<Eatery> eateries, int numOfTicksNextPerson, int averageEateryTime,
+			int cashierTime, Eatery destinationAfter, int quitTime) {
 		this.cashierTime = cashierTime;
 		this.eateries = eateries;
 		//this.eatery = eatery;
@@ -76,10 +76,11 @@ public class PersonProducer implements ClockListener {
 			else
 				customer = new SpecialNeedsPerson(person);
 			
-			this.eateries.get(rand.nextInt(eateries.size())).add(customer);;
-			
+			this.eateries.get(rand.nextInt(eateries.size())).add(customer);
+			//System.out.println("Produced Person at: " + tick);
 			// You can save off where the person should go.
-			customer.setDestination(destinationAfter); 
+			customer.setDestination(destinationAfter);
+			
 		}
 	}
 

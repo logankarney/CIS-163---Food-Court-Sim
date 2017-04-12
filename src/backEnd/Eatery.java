@@ -23,7 +23,7 @@ public class Eatery implements ClockListener {
 	}
 	
 	public void event (int tick) throws EmptyQException{
-		System.out.println("Eatery Q: " + Q.size());
+		//System.out.println("Eatery Q: " + Q.size());
 		if (tick >= timeOfNextEvent) {
 			if (person != null) { 			// Notice the delay that takes place here
 				if(person.getDestination() != null) {

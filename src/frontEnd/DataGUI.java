@@ -106,9 +106,9 @@ public class DataGUI extends JFrame implements ActionListener {
 		line = new JLabel("----------------------------------------------");
 		secToNextPerson = new JLabel("Seconds to the Next Person");
 		avgSecondsCashier = new JLabel("Average Seconds per cashier");
-		totalTime = new JLabel("Total time in seconds");
+		totalTime = new JLabel("Seconds Before Person Leaves");
 		avgSecondsEatery = new JLabel("Average Seconds per Eatery");
-		secBeforePersonLeaves = new JLabel("Seconds Before Person Leaves");
+		secBeforePersonLeaves = new JLabel("Total Time in Seconds");
 		numOfEateries = new JLabel("Number of Eateries");
 
 		//creates the top JTextFields
@@ -200,6 +200,7 @@ public class DataGUI extends JFrame implements ActionListener {
 		//adds JMenu
 		menu.add(fileMenu);
 		setJMenuBar(menu);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	/**
 	 *Listens to actions performed by user
@@ -237,7 +238,6 @@ public class DataGUI extends JFrame implements ActionListener {
 			booth.addCheckOut();
 			for(int i = 0; i < numEateries; i++){
 				booth.addEatery();
-				i++;
 			}
 			try{
 				booth.run(totalTime);
@@ -247,12 +247,12 @@ public class DataGUI extends JFrame implements ActionListener {
 			}
 
 			throughput2.setText(booth.getThroughput() + " people");
-			avgTimePerson2.setText(booth.averageTime() + " seconds");
+			avgTimePerson2.setText(String.format("%.3f", booth.averageTime()) + " seconds");
 			numPeopleInLine2.setText(booth.findPeopleLeft() + " people");
 			maxQLengthCashier2.setText(booth.findMaxEateryLine() + " people");
-			snStats.setText("seconds");
-			ltStats.setText("seconds");
-			regStats.setText("seconds");
+			snStats.setText(String.format("%.3f", booth.getSNAvgTime()) + " seconds");
+			ltStats.setText(String.format("%.3f", booth.getLTAvgTime()) + " seconds");
+			regStats.setText(String.format("%.3f", booth.getRAvgTime()) + " seconds");
 			this.booth = new FoodCourtLogic(0,0,0,0);
 
 		}

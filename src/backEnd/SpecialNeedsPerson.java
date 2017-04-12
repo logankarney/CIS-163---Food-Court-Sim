@@ -16,7 +16,7 @@ public class SpecialNeedsPerson extends Person{
 		
 		this.type = TypeOfPerson.SPECIAL_NEEDS;
 		setCashierTime((getCashierTime()*2));
-		setTickTime((getTickTime()*3));
+		setQuitTime((getQuitTime()*3));
 		setEateryTime(getEateryTime() * 4);
 
 	}
