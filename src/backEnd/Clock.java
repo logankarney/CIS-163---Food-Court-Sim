@@ -11,6 +11,8 @@ public class Clock {
 	private ClockListener[] myListeners;
 	private int numListeners;
 	private int MAX = 100;
+	
+	/** boolean that determines if the clock has ended **/
 	private boolean hasEnded;
 
 	public Clock() {
@@ -57,6 +59,10 @@ public class Clock {
 	public int getMAX() {
 		return MAX;
 	}
+	
+	/**
+	* getter for hasEnded
+	**/
 	public boolean getHasEnded(){
 		return hasEnded;
 	}
