@@ -24,7 +24,9 @@ import javax.swing.border.EmptyBorder;
 import backEnd.Clock;
 import backEnd.Eatery;
 import backEnd.EmptyQException;
+import backEnd.FoodCourtLogic;
 import backEnd.PersonProducer;
+
 
 public class DataGUI extends JFrame implements ActionListener {
 
@@ -86,16 +88,6 @@ public class DataGUI extends JFrame implements ActionListener {
 		/*
 		 * Stuff added from the sim class that was given
 		 */
-		clk = new Clock();
-
-		// int numOfTicksNextPerson = 20
-		// int averageBoothTime = 20
-
-		// PersonProducer produce = new PersonProducer(booth, 20, 18, 18);
-		// clk.add(produce);
-		// clk.add(booth);
-
-		// clk.run(10000);
 
 		// BorderLayout used to organize the JPanels in the JFrame
 		this.setLayout(new BorderLayout());
@@ -151,9 +143,9 @@ public class DataGUI extends JFrame implements ActionListener {
 		stop = new JButton("Quit Simulation");
 		stop.addActionListener(this);
 
-		specialNeeds = new JLabel("Special Needs Person Time:");
-		limitedTime = new JLabel("Limited Time Person Time:");
-		regular      = new JLabel("Regular Person Time:");
+		specialNeeds = new JLabel("Special Needs Person Average Time:");
+		limitedTime = new JLabel("Limited Time Person Average Time:");
+		regular      = new JLabel("Regular Person Average Time:");
 		snStats      = new JLabel("");
 		ltStats      = new JLabel("");
 		regStats     = new JLabel("");
@@ -235,53 +227,47 @@ public class DataGUI extends JFrame implements ActionListener {
 			int secsBeforePersonLeaves;
 			int numEateries;
 
-				try {
+			try {
 
-					nextPersonTime = Integer.parseInt(secToNextPersonLabel.getText());
-					cashierTime = Integer.parseInt(avgSecondsCashierLabel.getText());
-					totalTime = Integer.parseInt(totalTimeLabel.getText());
-					avgEateryTime = Integer.parseInt(avgSecondsEateryLabel.getText());
-					secsBeforePersonLeaves = Integer.parseInt(secBeforePersonLeavesLabel.getText());
-					numEateries = Integer.parseInt(numOfEateriesLabel.getText());
-					
-					
-				}
-				catch (Exception f) {
-					JOptionPane.showMessageDialog(input, "Put in valid integers");
-					return;
-				}
-				while(true){
-					
-					booth = new FoodCourtLogic(nextPersonTime, avgEateryTime, cashierTime);
-					booth.run(totalTime);
-					for(int i = 0; i < numEateries; i++){
-						booth.addEatery();
-						i++;
-					}
-					// PUT FOODCOURTLOGIC CLASS HERE
-					
-					//public int getLeft() {
-					//	return Q.size();
-					//}
-					
-					//public int getMaxQlength() {
-					//	return maxQlength;
-					//}
+				nextPersonTime = Integer.parseInt(secToNextPersonLabel.getText());
+				cashierTime = Integer.parseInt(avgSecondsCashierLabel.getText());
+				totalTime = Integer.parseInt(totalTimeLabel.getText());
+				avgEateryTime = Integer.parseInt(avgSecondsEateryLabel.getText());
+				secsBeforePersonLeaves = Integer.parseInt(secBeforePersonLeavesLabel.getText());
+				numEateries = Integer.parseInt(numOfEateriesLabel.getText());
 
-					//public int getThroughPut() {
-					//	return completed;
-					//}
-					
-					throughput2.setText("Total Time: " + booth.getThroughput() + " seconds");
-					avgTimePerson2.setText("seconds");
-					numPeopleInLine2.setText(" people");
-					maxQLengthCashier2.setText(" people");
-					snStats.setText("seconds");
-					ltStats.setText("seconds");
-					regStats.setText("seconds");
-					if(booth.)
-						break;
+
 			}
+			catch (Exception f) {
+				JOptionPane.showMessageDialog(input, "Put in valid integers");
+				return;
+			}
+
+				booth = new FoodCourtLogic(nextPersonTime, avgEateryTime, cashierTime, secsBeforePersonLeaves);
+				booth.addCheckOut();
+				booth.addCheckOut();
+				for(int i = 0; i < numEateries; i++){
+					booth.addEatery();
+					i++;
+				}
+				try{
+					booth.run(totalTime);
+				}
+				catch(EmptyQException ez){
+					JOptionPane.showMessageDialog(input, "Error, Tried to remove from Empty Que");
+				}
+				
+				// PUT FOODCOURTLOGIC CLASS HERE
+
+				throughput2.setText(booth.getThroughput() + " people");
+				avgTimePerson2.setText(booth.averageTime() + " seconds");
+				numPeopleInLine2.setText(booth.findPeopleLeft() + " people");
+				maxQLengthCashier2.setText(booth.findMaxEateryLine() + " people");
+				snStats.setText("seconds");
+				ltStats.setText("seconds");
+				regStats.setText("seconds");
+				this.booth = new FoodCourtLogic(0,0,0,0);
+				
 		} else if (e.getSource() == stop) {
 			throughput2.setText("Total Time: " + " seconds");
 			avgTimePerson2.setText("seconds");
@@ -291,7 +277,7 @@ public class DataGUI extends JFrame implements ActionListener {
 			ltStats.setText("seconds");
 			regStats.setText("seconds");
 			// FOODCOURTLOGIC OBJECT = NULL;
-			
+
 		} else if (e.getSource() == clearItem) {
 			secToNextPersonLabel.setText("");
 			avgSecondsCashierLabel.setText("");
