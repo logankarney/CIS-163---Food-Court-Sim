@@ -38,6 +38,8 @@ public class Eatery implements ClockListener {
 				person = Q.deQ();		// do not send this person as of yet, make them wait. 
 				timeOfNextEvent = tick + (int) (person.getBoothTime() + 1);
 				isServicing = true;
+				
+				//determines if the person has been fully serviced
 				if(!person.shouldLeaveLine)
 					completed++;	
 				else
@@ -46,13 +48,6 @@ public class Eatery implements ClockListener {
 		}
 	}
 	
-	/*
-	private void removeImpatient() {
-		for() {
-			
-		}
-	}
-	*/
 	public int getLeft() {
 		return Q.size();
 	}
@@ -65,10 +60,16 @@ public class Eatery implements ClockListener {
 		return completed;
 	}
 	
+	/**
+	* getter for personLeftLine
+	**/
 	public int getPeopleFailed(){
 		return personLeftLine;
 	}
 	
+	/**
+	* getter for isServicing
+	**/
 	public boolean isServicing() {
 		return isServicing;
 	}
