@@ -22,7 +22,7 @@ public class PayLine extends Eatery {
 	}
 	
 	public void event(int tick) throws EmptyQException{
-		System.out.println("Pay Line Q: " + Q.size());
+		//System.out.println("Pay Line Q: " + Q.size());
 			if (person != null) { 			// Notice the delay that takes place here
 				if(!person.getDestination().isServicing()) {
 					person.getDestination().add(person);

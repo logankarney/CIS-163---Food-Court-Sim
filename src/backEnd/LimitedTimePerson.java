@@ -22,7 +22,7 @@ public class LimitedTimePerson extends Person{
 	public LimitedTimePerson(Person p){
 			super(p);
 			this.type = TypeOfPerson.LIMITED_TIME;
-			setTickTime((int)(getTickTime() * 0.5));
+			setCashierTime((int)(getCashierTime() * 0.5));
 			setEateryTime(getEateryTime() * .5);
 			setQuitTime((int)(getQuitTime() * .8));
 		}
