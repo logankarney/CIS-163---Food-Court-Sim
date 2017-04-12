@@ -1,11 +1,11 @@
-/**
- * 
- */
 package backEnd;
 
-/**
- * @author   Roger Ferguson
- */
+/******************************************************************************
+ * Backend methods of a Person object
+ * 
+ * @author Logan Karney, Ryan Eisenbarth, Logun DeLeon
+ * @version Winter 2017
+ *****************************************************************************/
 public class Person implements ClockListener{
 
   /** Enum that describes what type of person the object will be**/
