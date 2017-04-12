@@ -6,12 +6,10 @@ import java.util.Random;
 public class PayLine extends Eatery {
 	private ArrayList<Cashier> checkOut;
 	private Random r;
-	private int numCheckOut;
 	
 	public PayLine(ArrayList<Cashier> checkOut) {
 		this.checkOut = checkOut;
 		r = new Random();
-		numCheckOut = checkOut.size();
 	}
 	
 	public void add(Person p) {
