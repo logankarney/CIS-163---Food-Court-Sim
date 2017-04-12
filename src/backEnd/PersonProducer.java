@@ -39,13 +39,17 @@ public class PersonProducer implements ClockListener {
 	public void event(int tick) {
 		if (nextPerson <= tick) {
 			nextPerson = tick + numOfTicksNextPerson;
-
+		
+			//following lines create a person object of varying type and varying instance variables
 			Person person = new Person();
 			
 			Random rand = new Random();
 
 			int rNumber = rand.nextInt(3);
+			
+			//determines if the increment is positive or negative
 			boolean positive = rand.nextBoolean();
+
 			if(!positive)
 				rNumber *= -1;
 
@@ -57,7 +61,7 @@ public class PersonProducer implements ClockListener {
 			if(!positive)
 				rNumber *= -1;
 			
-			person.setQuitTime(quitTime + rNumber);//set leave time random
+			person.setQuitTime(quitTime + rNumber);
 
 			person.setTickTime(tick);
 
@@ -73,10 +77,9 @@ public class PersonProducer implements ClockListener {
 				customer = new SpecialNeedsPerson(person);
 			
 			this.eateries.get(rand.nextInt(eateries.size())).add(customer);;
-			//eatery.add(customer);
-
-			customer.setDestination(destinationAfter); // You can save
-			// off where the person should go.
+			
+			// You can save off where the person should go.
+			customer.setDestination(destinationAfter); 
 		}
 	}
 
