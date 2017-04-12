@@ -2,6 +2,9 @@ package backEnd;
 
 public class SpecialNeedsPerson extends Person{
 	
+	/***
+	* Constructor for a SpecialNeedsPerson
+	***/
 	public SpecialNeedsPerson(Person p){
 		super(p);
 		
